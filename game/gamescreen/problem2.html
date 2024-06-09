@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body style="display: flex; flex-direction: row">
+    <script>
+      var gid = sessionStorage.getItem("game_id");
+      var t1 = sessionStorage.getItem("trash1");
+      $.ajax({
+        url: "https://api.super-cleaner.kro.kr/record/",
+        type: "POST",
+        data: {
+          game_id: gid,
+          trash_id: t1,
+        },
+        dataType: "json",
+        success: function (data, textStatus, xhr) {
+          console.log(data);
+          sessionStorage.setItem("trash_name", data.trash.trash_name);
+          sessionStorage.setItem("image_url", data.trash.image_url);
+
+          document.getElementById("item").src =
+            sessionStorage.getItem("image_url");
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          console.log("Error in Operation");
+        },
+      });
+    </script>
+    <div class="background1" id="container">
+      <img src="../../images/background.png" class="backgroundimage" />
+      <div class="process_box">
+        <p
+          class="process_text"
+          style="
+            color: #fff;
+            text-align: center;
+            font-family: 'Black Han Sans';
+            font-size: 42px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin: 0;
+          "
+        >
+          진행상황<br />2 / 10개
+        </p>
+      </div>
+      <div class="screen">
+        <div class="recycle_container">
+          <div class="recycle_box" id="paper">
+            <img
+              src="../../images/recycle1.png"
+              class="recycle_image"
+              style="width: 98%; height: 98%"
+            />
+          </div>
+          <div class="recycle_box" id="canbottle">
+            <img
+              src="../../images/recycle2.png"
+              class="recycle_image"
+              id="canbottle_img"
+            />
+          </div>
+          <div class="recycle_box" id="plastic">
+            <img src="../../images/recycle3.png" class="recycle_image" />
+          </div>
+          <div class="recycle_box" id="general">
+            <img
+              src="../../images/recycle4.png"
+              class="recycle_image"
+              style="margin-left: 15px"
+            />
+          </div>
+          <div class="recycle_box" id="food">
+            <img
+              src="../../images/recycle5.png"
+              class="recycle_image"
+              style="margin-left: 22px"
+            />
+          </div>
+          <div class="recycle_box" id="bag">
+            <img
+              src="../../images/recycle6.png"
+              class="recycle_image"
+              style="margin-left: 10px"
+            />
+          </div>
+        </div>
+
+        <div class="recycle_text_container">
+          <div class="recycle_text_box0"></div>
+          <div class="recycle_text_box1">
+            <p
+              class="recycle_text"
+              style="
+                text-align: center;
+                color: #fff;
+                font-family: 'Black Han Sans';
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+                margin-top: 8px;
+              "
+            >
+              종이
+            </p>
+          </div>
+          <div class="recycle_text_box2">
+            <p
+              class="recycle_text"
+              style="
+                text-align: center;
+                color: #fff;
+                font-family: 'Black Han Sans';
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+                margin-top: 8px;
+              "
+            >
+              캔/병
+            </p>
+          </div>
+          <div class="recycle_text_box3">
+            <p
+              class="recycle_text"
+              style="
+                text-align: center;
+                color: #fff;
+                font-family: 'Black Han Sans';
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+                margin-top: 8px;
+              "
+            >
+              플라스틱
+            </p>
+          </div>
+          <div class="recycle_text_box4">
+            <p
+              class="recycle_text"
+              style="
+                text-align: center;
+                color: #fff;
+                font-family: 'Black Han Sans';
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+                margin-top: 8px;
+              "
+            >
+              일반쓰레기
+            </p>
+          </div>
+          <div class="recycle_text_box5">
+            <p
+              class="recycle_text"
+              style="
+                text-align: center;
+                color: #fff;
+                font-family: 'Black Han Sans';
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+                margin-top: 8px;
+              "
+            >
+              음식물
+            </p>
+          </div>
+          <div class="recycle_text_box6">
+            <p
+              class="recycle_text"
+              style="
+                text-align: center;
+                color: #fff;
+                font-family: 'Black Han Sans';
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                margin: 0;
+                margin-top: 8px;
+              "
+            >
+              비닐
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <img src="../../images/logo2.png" class="robot" />
+
+      <img src="../../images/coke.png" id="item" draggable="true" />
+    </div>
+
+    <div
+      class="answer_shade"
+      style="height: 0px; display: none"
+      id="answer_shade"
+    ></div>
+    <div
+      class="correct_answer_box"
+      style="height: 0px; display: none"
+      id="correct_answer_box"
+    >
+      <img src="../../images/logo_pass.png" class="answer_img" />
+      <div class="answer_text_box">
+        <p
+          class="answer_text"
+          style="
+            color: #000;
+            text-align: center;
+            font-family: 'Black Han Sans';
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-top: 30px;
+            margin-bottom: 30px;
+          "
+        >
+          정말 잘했어 !<br />콜라 캔은 캔에 버리면 돼
+        </p>
+        <button
+          class="next_btn"
+          id="correct_next_btn"
+          style="
+            width: 219.166px;
+            height: 80.833px;
+            border-radius: 50px;
+            background: #004938;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            color: #fff;
+            text-align: center;
+            font-family: 'Black Han Sans';
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            cursor: pointer;
+          "
+        >
+          다음으로
+        </button>
+      </div>
+    </div>
+    <div
+      class="wrong_answer_box"
+      style="height: 0px; display: none"
+      id="wrong_answer_box"
+    >
+      <img src="../../images/logo_wrong.png" class="answer_img" />
+      <div class="answer_text_box">
+        <p
+          class="answer_text"
+          style="
+            color: #000;
+            text-align: center;
+            font-family: 'Black Han Sans';
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-top: 30px;
+            margin-bottom: 30px;
+          "
+        >
+          콜라 캔은 캔에 버려야 해 !<br />이제 알겠지?
+        </p>
+        <button
+          class="next_btn"
+          id="wrong_next_btn"
+          style="
+            width: 219.166px;
+            height: 80.833px;
+            border-radius: 50px;
+            background: #004938;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            color: #fff;
+            text-align: center;
+            font-family: 'Black Han Sans';
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            cursor: pointer;
+          "
+        >
+          다음으로
+        </button>
+      </div>
+    </div>
+    <script type="text/javascript" src="./script.js"></script>
+    <script>
+      var urlParams;
+      var name;
+      var trash1;
+      var score;
+
+      window.onload = function () {
+        urlParams = new URLSearchParams(window.location.search);
+        name = urlParams.get("name");
+        trash1 = urlParams.get("trash1");
+        score = urlParams.get("score");
+      };
+      document
+        .querySelector("#correct_next_btn")
+        .addEventListener("click", navigateToNextPage_Correct);
+      document
+        .querySelector("#wrong_next_btn")
+        .addEventListener("click", navigateToNextPage_Wrong);
+
+      function navigateToNextPage_Correct() {
+        var p_answer = "true";
+        score = parseInt(score) + 10;
+        window.location.href =
+          "problem3.html?name=" +
+          name +
+          "&trash1=" +
+          trash1 +
+          "&trash2=" +
+          encodeURIComponent(p_answer) +
+          "&score=" +
+          score;
+      }
+
+      function navigateToNextPage_Wrong() {
+        var p_answer = "false";
+        window.location.href =
+          "problem3.html?name=" +
+          name +
+          "&trash1=" +
+          trash1 +
+          "&trash2=" +
+          encodeURIComponent(p_answer) +
+          "&score=" +
+          score;
+      }
+    </script>
+  </body>
+</html>

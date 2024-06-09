@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: -2;
+        -ms-overflow-style: none; /* 인터넷 익스플로러 */
+        scrollbar-width: none; /* 파이어폭스 */
+      }
+
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      #container {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        width: 1600px;
+        height: 900px;
+        overflow: hidden;
+        touch-action: none;
+        margin: auto;
+        background-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.4) 12.92%,
+            rgba(255, 255, 255, 0.22) 36.88%,
+            rgba(255, 255, 255, 0.16) 55.11%,
+            rgba(255, 255, 255, 0.16) 73.96%,
+            rgba(0, 0, 0, 0.4) 88.54%
+          ),
+          url("../../images/background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      #title {
+        position: absolute;
+        width: 450px;
+        height: 138px;
+        left: 600px;
+        top: 115px;
+        justify-content: center;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 108px;
+        line-height: normal;
+        /* identical to box height */
+
+        color: #ffffff;
+      }
+
+      #text {
+        position: absolute;
+        width: 800px;
+        height: 380px;
+        left: 552.5px;
+        top: 350px;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 62.5px;
+        line-height: normal;
+        text-align: center;
+
+        color: #ffffff;
+      }
+
+      #next {
+        position: absolute;
+        width: 264.166px;
+        height: 80.833px;
+        left: 850px;
+
+        top: 708.33px;
+        /* 조정 가능한 값 */
+        background: #004938;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 50px;
+        z-index: 2;
+        /* 다른 요소보다 위에 나타나도록 설정 */
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 35px;
+        line-height: 76px;
+        text-align: center;
+        color: #ffffff;
+        cursor: pointer;
+      }
+
+      #logo {
+        position: absolute;
+        width: 326.66px;
+        height: 586.66px;
+        left: 191.66px;
+        top: 314.166px;
+
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+    </style>
+    <script>
+      var name;
+
+      window.onload = function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        name = urlParams.get("name");
+
+        document.getElementById("text").innerHTML =
+          name +
+          "!<br />지구에 떠다니는 쓰레기를<br />마우스로 움직여서<br />올바른 쓰레기통에 넣어주면 돼!";
+      };
+
+      function navigateToNextPage() {
+        window.location.href =
+          "../gamescreen/problem1.html?name=" + encodeURIComponent(name);
+      }
+    </script>
+    <div id="container">
+      <div id="title">
+        <img
+          src="../../images/super-cleaner6.png"
+          style="width: 150%; height: 150%"
+        />
+      </div>
+      <div id="text">이 부분은 JavaScript에 의해 동적으로 변경됩니다.</div>
+      <button type="button" id="next" onclick="navigateToNextPage()">
+        환경 지키러 가기
+      </button>
+      <div id="logo">
+        <img src="../../images/logo.png" style="width: 100%; height: 100%" />
+      </div>
+    </div>
+  </body>
+</html>

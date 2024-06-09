@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: -2;
+        -ms-overflow-style: none; /* 인터넷 익스플로러 */
+        scrollbar-width: none; /* 파이어폭스 */
+      }
+
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      #container {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        width: 1600px;
+        height: 900px;
+        overflow: hidden;
+        touch-action: none;
+        margin: auto;
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.40) 12.92%, rgba(255, 255, 255, 0.22) 36.88%, rgba(255, 255, 255, 0.16) 55.11%, rgba(255, 255, 255, 0.16) 73.96%, rgba(0, 0, 0, 0.40) 88.54%), url("./images/background.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      #title {
+        position: absolute;
+        width: 450px;
+        height: 138px;
+        left: 600px;
+        top: 115px;
+        justify-content: center;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 108px;
+        line-height: normal;
+        /* identical to box height */
+
+        color: #ffffff;
+      }
+
+      #text {
+        /* 지구가 쓰레기 더미에 뒤덮였어 ! 나랑 같이 지구를 지키러갈래? */
+
+        position: absolute;
+        width: 770px;
+        height: 160px;
+        left: 555.833px;
+        top: 386.66px;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 62.5px;
+        line-height: normal;
+        text-align: center;
+
+        color: #ffffff;
+      }
+
+      #next {
+        position: absolute;
+        width: 264.166px;
+        height: 80.833px;
+        left: 686.66px;
+
+        top: 708.33px; /* 조정 가능한 값 */
+        background: #004938;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 50px;
+        z-index: 2; /* 다른 요소보다 위에 나타나도록 설정 */
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 76px;
+        text-align: center;
+        color: #ffffff;
+        cursor: pointer;
+      }
+
+      #logo {
+        position: absolute;
+        width: 326.66px;
+        height: 586.66px;
+        left: 163.33px;
+        top: 225px;
+
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+    </style>
+    <div id="container">
+      <div id="title">슈퍼클리너</div>
+      <div id="text">
+        지구가 쓰레기 더미에 뒤덮였어!
+        <br />
+        나랑 같이 지구를 지키러갈래?
+      </div>
+      <button type="button" id="next" onclick="navigateToNextPage()">출발하기</button>
+      <div id="logo">
+        <img src="./images/logo.png" style="width: 100%; height: 100%;"/>
+      </div>
+    </div>
+    <script>
+      window.onload = function () {
+      $.ajax({
+        url: 'https://api.super-cleaner.kro.kr/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data, textStatus, xhr) {
+          console.log(data);
+          console.log(textStatus);
+          console.log(xhr);
+        },
+        error: function (xhr, textStatus, errorThrown) {
+          console.log(xhr);
+          console.log(textStatus);
+          console.log(errorThrown);
+          console.log('Error in Operation');
+        }
+      });
+    }
+      function navigateToNextPage() {
+        window.location.href = "game/gamestart/name.html";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index: -2;
+        -ms-overflow-style: none;
+        /* 인터넷 익스플로러 */
+        scrollbar-width: none;
+        /* 파이어폭스 */
+      }
+
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      #container {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        width: 1600px;
+        height: 900px;
+        overflow: hidden;
+        touch-action: none;
+        margin: auto;
+        background-image: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.4) 12.92%,
+            rgba(255, 255, 255, 0.22) 36.88%,
+            rgba(255, 255, 255, 0.16) 55.11%,
+            rgba(255, 255, 255, 0.16) 73.96%,
+            rgba(0, 0, 0, 0.4) 88.54%
+          ),
+          url("../../images/background_pass.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      #whitebox {
+        position: absolute;
+        top: 139px;
+        margin-left: 105px;
+        margin-right: 70px;
+        width: 1425px;
+        height: 691px;
+        flex-shrink: 0;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.5);
+        touch-action: none;
+      }
+
+      #resultbox {
+        box-sizing: border-box;
+
+        position: absolute;
+        width: 777.5px;
+        height: 601.66px;
+        right: 130px;
+        top: 200.83px;
+
+        background: rgba(255, 255, 255, 0.78);
+        border: 1px solid #000000;
+        border-radius: 30px;
+      }
+
+      #quiztext {
+        position: absolute;
+        width: 700px;
+        height: 541.66px;
+        left: 50px;
+        top: 37.5px;
+        overflow: scroll;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 100;
+        font-size: 50px;
+        line-height: 80px;
+        text-align: left;
+        /* or 217% */
+
+        color: #000000;
+      }
+
+      #quiztext::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      #quiztext::-webkit-scrollbar-track {
+        background-color: none;
+      }
+
+      #quiztext::-webkit-scrollbar-thumb {
+        background: #aaa;
+        border-radius: 10px;
+      }
+
+      #quiztext::-webkit-scrollbar-thumb:hover {
+        background: #404040;
+      }
+
+      #quiztext::-webkit-scrollbar-thumb:active {
+        background: #808080;
+      }
+
+      #quiztext::-webkit-scrollbar-button {
+        display: none;
+      }
+
+      #title {
+        position: absolute;
+        width: 677.5px;
+        height: 100px;
+        left: 470px;
+        top: 70px;
+        justify-content: center;
+        text-align: center;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 95px;
+        line-height: 165px;
+        z-index: 4;
+
+        /* identical to box height */
+
+        color: #000000;
+        -webkit-text-stroke: 2px white;
+      }
+
+      #text {
+        /* 지구가 쓰레기 더미에 뒤덮였어 ! 나랑 같이 지구를 지키러갈래? */
+
+        position: absolute;
+        width: 1500px;
+        height: 190px;
+        right: 250px;
+        top: 317.5px;
+        margin: 0 auto;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 10;
+        font-size: 30px;
+        line-height: 50px;
+        text-align: center;
+
+        color: #000000;
+      }
+
+      #score {
+        position: absolute;
+        width: 181px;
+        height: 61px;
+        left: 66.66px;
+        top: 160px;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 51px;
+        text-align: center;
+
+        color: #000000;
+      }
+
+      #point {
+        position: absolute;
+        width: 300px;
+        height: 145px;
+        left: 180.833px;
+        top: 98.33px;
+
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 300;
+        font-size: 130px;
+        line-height: 127px;
+        text-align: center;
+
+        color: #0029ff;
+      }
+
+      #next {
+        position: absolute;
+        width: 219.166px;
+        height: 80.833px;
+        left: 1230.66px;
+        top: 635.166px;
+        /* 조정 가능한 값 */
+        background: #004938;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 50px;
+        z-index: 2;
+        /* 다른 요소보다 위에 나타나도록 설정 */
+        font-family: "Black Han Sans";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 45px;
+        line-height: 76px;
+        text-align: center;
+        color: #ffffff;
+      }
+
+      #logo {
+        position: absolute;
+        width: 283.33px;
+        height: 486.66px;
+        left: 120px;
+        top: 515.833px;
+
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      }
+
+      h4 {
+        background-color: #000000;
+        width: 680px;
+        height: 5px;
+        margin: 0;
+        margin-bottom: 10px;
+        position: relative;
+        left: -100px;
+        top: -15px;
+      }
+    </style>
+    <div id="container">
+      <div id="title">결과 확인</div>
+      <div id="whitebox">
+        <div id="score">결과</div>
+        <div id="point">70점</div>
+        <div id="text"></div>
+        <button type="button" id="next" onclick="navigateToNextPage()">
+          다시하기
+        </button>
+      </div>
+      <div id="resultbox">
+        <form style="width: 100%; height: 100%">
+          <div id="quiztext">
+            <ol style="position: relative; left: 50px; width: 250px; margin: 0">
+              <li class="trash1">콜라 캔</li>
+              <h4></h4>
+              <li class="trash2">택배 박스</li>
+              <h4></h4>
+              <li class="trash3">라면 봉지</li>
+              <h4></h4>
+              <li class="trash4">박카스 병</li>
+              <h4></h4>
+              <li class="trash5">닭뼈</li>
+              <h4></h4>
+              <li class="trash6">귤 껍질</li>
+              <h4></h4>
+              <li class="trash7">가방</li>
+              <h4></h4>
+              <li class="trash8">페트병</li>
+              <h4></h4>
+              <li class="trash9">배달용기</li>
+              <h4></h4>
+              <li class="trash10">스파게티</li>
+              <h4></h4>
+            </ol>
+            <ul
+              style="
+                position: absolute;
+                top: 0px;
+                left: 380px;
+                width: 250px;
+                margin: 0;
+                list-style-type: none;
+              "
+            >
+              <li class="trash1">캔/병</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash2">종이</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash3">비닐</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash4">캔/병</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash5">일반쓰레기</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash6">일반쓰레기</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash7">일반쓰레기</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash8">플라스틱</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash9">플라스틱</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+              <li class="trash10">음식물</li>
+              <h4 style="visibility: hidden; width: 10px"></h4>
+            </ul>
+          </div>
+        </form>
+      </div>
+      <div id="logo">
+        <img
+          src="../../images/logo_pass.png"
+          style="width: 100%; height: 100%"
+        />
+      </div>
+    </div>
+    <script>
+      var urlParams;
+      var name;
+      var trash1;
+      var trash2;
+      var trash3;
+      var trash4;
+      var trash5;
+      var trash6;
+      var trash7;
+      var trash8;
+      var trash9;
+      var trash10;
+      var player_score = 0;
+      var tname;
+      var welements;
+
+      window.onload = function () {
+        var urlParams = new URLSearchParams(window.location.search);
+        name = urlParams.get("name");
+        trash1 = urlParams.get("trash1");
+        trash2 = urlParams.get("trash2");
+        trash3 = urlParams.get("trash3");
+        trash4 = urlParams.get("trash4");
+        trash5 = urlParams.get("trash5");
+        trash6 = urlParams.get("trash6");
+        trash7 = urlParams.get("trash7");
+        trash8 = urlParams.get("trash8");
+        trash9 = urlParams.get("trash9");
+        trash10 = urlParams.get("trash10");
+
+        document.getElementById("text").innerHTML =
+          name + "!<br />같이 지구를<br />구해줘서 고마워!";
+
+        var player_answer = [
+          trash1,
+          trash2,
+          trash3,
+          trash4,
+          trash5,
+          trash6,
+          trash7,
+          trash8,
+          trash9,
+          trash10,
+        ];
+
+        for (var i = 0; i < 10; i++) {
+          if (player_answer[i] == "true") {
+            player_score += 10;
+          } else {
+            tname = "trash" + (i + 1);
+            welements = document.getElementsByClassName(tname);
+            for (var j = 0; j < welements.length; j++) {
+            welements[j].style.color = "red";
+          }
+          }
+        }
+
+        document.getElementById("point").innerHTML = player_score.toString() + "점";
+
+        $.ajax({
+          url: "https://api.super-cleaner.kro.kr",
+          type: "GET",
+          dataType: "json",
+          success: function (data, textStatus, xhr) {
+            console.log(data);
+          },
+          error: function (xhr, textStatus, errorThrown) {
+            console.log("Error in Operation");
+          },
+        });
+      };
+
+      function navigateToNextPage() {
+        window.location.href = "../../index.html";
+      }
+    </script>
+  </body>
+</html>
